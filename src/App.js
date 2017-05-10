@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import axios from "axios";
 import './App.css';
 import Output from './components/Output';
-import Select from './components/Controls/Select'
+import Select from './components/Controls/Select';
+import Text from './components/Controls/Text';
 
 
 class App extends Component {
@@ -34,19 +35,28 @@ class App extends Component {
   showHtml(x) {
     this.setState({html: x}, this.getSampleText);
   }
+  changeParas(number) {
+    this.setState({paras: number}, this.getSampleText);
+  }
 
   render() {
     return (
       <div className="App container">
-        <h1>ReactJS Sample Ipsum Text Generator</h1>
+        <h1>ReactJS Ipsum Text Generator</h1>
         <hr />
 
         <form className="form-inline">
+          <div className="form-group">
+            <label>Number of Paragraphs: </label>
+              <Text value={"this.state.paras"} onChange={this.changeParas.bind(this)} />
+          </div>
           <div className="form-group">
             <label>Include HTML tags: </label>
               <Select value={"this.state.html"} onChange={this.showHtml.bind(this)} />
           </div>
         </form>
+        <br />
+        <br />
         <Output value={this.state.text} />
       </div>
     );
