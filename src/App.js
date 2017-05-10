@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import './App.css';
-import Output from './components/output';
+import Output from './components/Output';
+import Select from './components/Controls/Select'
 
 
 class App extends Component {
@@ -30,9 +31,22 @@ class App extends Component {
       });
   }
 
+  showHtml(x) {
+    this.setState({html: x}, this.getSampleText);
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App container">
+        <h1>ReactJS Sample Ipsum Text Generator</h1>
+        <hr />
+
+        <form className="form-inline">
+          <div className="form-group">
+            <label>Include HTML tags: </label>
+              <Select value={"this.state.html"} onChange={this.showHtml.bind(this)} />
+          </div>
+        </form>
         <Output value={this.state.text} />
       </div>
     );
